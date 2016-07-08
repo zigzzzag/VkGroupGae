@@ -9,23 +9,17 @@
         <welcome-file>main.jsp</welcome-file>
     </welcome-file-list>
 
-    <servlet>
-        <servlet-name>main</servlet-name>
-        <jsp-file>main.jsp</jsp-file>
-    </servlet>
+    <listener>
+        <listener-class>org.zigzzzag.group.scheduler.VkGroupScheduler</listener-class>
+    </listener>
 
-    <servlet-mapping>
-        <servlet-name>main</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
+   <servlet>
         <servlet-name>groupMembersAction</servlet-name>
-        <servlet-class>org.zigzzzag.group.GroupMembers</servlet-class>
+        <servlet-class>org.zigzzzag.group.servlet.GroupMembers</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>groupMembersAction</servlet-name>
-        <url-pattern>/groupMembers</url-pattern>
+        <url-pattern>/groupMembers/*</url-pattern>
     </servlet-mapping>
 </web-app>
