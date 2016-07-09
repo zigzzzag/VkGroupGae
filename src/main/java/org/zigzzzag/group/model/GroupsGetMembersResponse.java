@@ -2,8 +2,9 @@ package org.zigzzzag.group.model;
 
 
 import com.google.appengine.repackaged.com.google.gson.Gson;
+import com.google.appengine.repackaged.com.google.gson.JsonObject;
+import com.google.appengine.repackaged.com.google.gson.JsonParser;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,6 +22,14 @@ public class GroupsGetMembersResponse {
         Gson g = new Gson();
         GroupsGetMembersResponse result = g.fromJson(json, GroupsGetMembersResponse.class);
         return result;
+    }
+
+    public static GroupsGetMembersResponse fromVkJson(String json) {
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(json).getAsJsonObject();
+        String response = obj.get("response").toString();
+
+        return fromJson(response);
     }
 
     @Override
