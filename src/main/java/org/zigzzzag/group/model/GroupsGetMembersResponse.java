@@ -41,7 +41,6 @@ public class GroupsGetMembersResponse {
 
         if (count != that.count) return false;
         return users != null ? users.equals(that.users) : that.users == null;
-
     }
 
     @Override

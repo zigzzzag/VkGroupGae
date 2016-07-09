@@ -17,9 +17,6 @@ import java.util.Set;
  */
 public class GroupManager extends HttpServlet {
 
-    private static final String GROUPS_GET_MEMBERS = "https://api.vk.com/method/groups.getMembers?group_id=";
-    private static final String DODO_BERDSK_GROUP_ID = "dodo_berdsk";
-
     public static volatile Set<VkGroup> VK_GROUPS = new HashSet<>();
 
     @Override
