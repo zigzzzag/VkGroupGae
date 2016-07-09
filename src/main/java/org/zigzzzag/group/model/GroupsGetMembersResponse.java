@@ -4,6 +4,7 @@ package org.zigzzzag.group.model;
 import com.google.appengine.repackaged.com.google.gson.Gson;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Zigzag on 09.07.2016.
@@ -11,7 +12,7 @@ import java.util.Arrays;
 public class GroupsGetMembersResponse {
 
     private int count;
-    private int[] users;
+    private List<Integer> users;
 
     public GroupsGetMembersResponse() {
     }
@@ -30,14 +31,14 @@ public class GroupsGetMembersResponse {
         GroupsGetMembersResponse that = (GroupsGetMembersResponse) o;
 
         if (count != that.count) return false;
-        return Arrays.equals(users, that.users);
+        return users != null ? users.equals(that.users) : that.users == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = count;
-        result = 31 * result + Arrays.hashCode(users);
+        result = 31 * result + (users != null ? users.hashCode() : 0);
         return result;
     }
 
@@ -49,11 +50,11 @@ public class GroupsGetMembersResponse {
         this.count = count;
     }
 
-    public int[] getUsers() {
+    public List<Integer> getUsers() {
         return users;
     }
 
-    public void setUsers(int[] users) {
+    public void setUsers(List<Integer> users) {
         this.users = users;
     }
 }
