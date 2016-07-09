@@ -5,7 +5,7 @@
     <title>ГРУПС</title>
 </head>
 <body>
-<h1>ГРУПС ФОР ДОДО</h1>
+<h1><a href="/">ГРУПС ФОР ДОДО</a></h1>
 
 <a href="/groupMembers">Управление группами</a>
 

@@ -1,5 +1,6 @@
 package org.zigzzzag.group.servlet;
 
+import com.google.appengine.repackaged.com.google.common.base.StringUtil;
 import org.zigzzzag.group.model.VkGroup;
 
 import javax.servlet.RequestDispatcher;
@@ -14,23 +15,26 @@ import java.util.Set;
 /**
  * Created by sbt-nikiforov-mo on 30.06.16.
  */
-public class GroupMembers extends HttpServlet {
+public class GroupManager extends HttpServlet {
 
     private static final String GROUPS_GET_MEMBERS = "https://api.vk.com/method/groups.getMembers?group_id=";
     private static final String DODO_BERDSK_GROUP_ID = "dodo_berdsk";
 
     public static volatile Set<VkGroup> VK_GROUPS = new HashSet<>();
 
-    static int count = 0;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(count++);
-
         String groupId = req.getParameter("groupId");
-        if (groupId != null) {
-            VkGroup newVkGroup = new VkGroup(groupId);
-            VK_GROUPS.add(newVkGroup);
+        String addGroup = req.getParameter("addGroup");
+        String deleteGroup = req.getParameter("deleteGroup");
+
+        if (!StringUtil.isEmptyOrWhitespace(groupId)) {
+            VkGroup vkGroup = new VkGroup(groupId);
+            if (!StringUtil.isEmptyOrWhitespace(addGroup)) {
+                VK_GROUPS.add(vkGroup);
+            } else if (!StringUtil.isEmptyOrWhitespace(deleteGroup)) {
+                VK_GROUPS.remove(vkGroup);
+            }
         }
 
         req.setAttribute("vkGroups", vkGroupsToString());

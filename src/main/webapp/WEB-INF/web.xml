@@ -15,7 +15,7 @@
 
    <servlet>
         <servlet-name>groupMembersAction</servlet-name>
-        <servlet-class>org.zigzzzag.group.servlet.GroupMembers</servlet-class>
+        <servlet-class>org.zigzzzag.group.servlet.GroupManager</servlet-class>
     </servlet>
 
     <servlet-mapping>
