@@ -20,7 +20,7 @@ public class VkGroupScheduler implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new VkGroupTask(), 0, 1, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new VkGroupTask(), 0, 1, TimeUnit.MINUTES);
     }
 
     @Override

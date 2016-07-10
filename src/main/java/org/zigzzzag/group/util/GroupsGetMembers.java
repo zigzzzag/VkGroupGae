@@ -21,16 +21,17 @@ public class GroupsGetMembers {
     private static final String GROUPS_GET_MEMBERS = "https://api.vk.com/method/groups.getMembers?group_id=%s&offset=%s";
     private static final String DODO_BERDSK_GROUP_ID = "dodo_berdsk";
 
-    public static GroupsGetMembersResponse getRespByGroupId(String groupId) {
-        return null;
-    }
-
     public static String getQuery(String groupId, int offset) {
         return String.format(GROUPS_GET_MEMBERS, groupId, offset);
     }
 
     public static GroupsGetMembersResponse getAllMembers(String groupId) throws IOException {
         GroupsGetMembersResponse firstResp = getAllMembers(groupId, 0);
+
+        //TODO remake on exception
+        if (firstResp.getCount() > 30_000) {
+            return null;
+        }
 
         Set<GroupsGetMembersResponse> otherResp = new HashSet<>();
         for (int i = MAX_MEMBERS_COUNT_RESPONSE; i < firstResp.getCount(); i += MAX_MEMBERS_COUNT_RESPONSE) {
