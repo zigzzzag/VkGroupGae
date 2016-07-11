@@ -14,12 +14,22 @@
     </listener>
 
    <servlet>
-        <servlet-name>groupMembersAction</servlet-name>
+        <servlet-name>groupManager</servlet-name>
         <servlet-class>org.zigzzzag.group.servlet.GroupManager</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>groupMembersAction</servlet-name>
-        <url-pattern>/groupMembers/*</url-pattern>
+        <servlet-name>groupManager</servlet-name>
+        <url-pattern>/groupMembers</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>groupReport</servlet-name>
+        <servlet-class>org.zigzzzag.group.servlet.GroupReport</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>groupReport</servlet-name>
+        <url-pattern>/groupReport</url-pattern>
     </servlet-mapping>
 </web-app>

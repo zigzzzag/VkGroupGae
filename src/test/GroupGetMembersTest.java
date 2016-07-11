@@ -5,6 +5,7 @@ import org.zigzzzag.group.model.GroupsGetMembers;
 import org.zigzzzag.group.util.GroupsGetMembersUtil;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Created by Zigzag on 09.07.2016.
@@ -18,7 +19,7 @@ public class GroupGetMembersTest extends TestCase {
 
         GroupsGetMembers expected = new GroupsGetMembers();
         expected.setCount(1676);
-        expected.setUsers(Arrays.asList(46481, 181495, 212086, 215268, 367386));
+        expected.setUsers(new HashSet<>(Arrays.asList(46481, 181495, 212086, 215268, 367386)));
 
         GroupsGetMembers actual = GroupsGetMembers.fromJson(testJson);
 
@@ -33,7 +34,7 @@ public class GroupGetMembersTest extends TestCase {
 
         GroupsGetMembers expected = new GroupsGetMembers();
         expected.setCount(1676);
-        expected.setUsers(Arrays.asList(46481, 181495, 212086, 215268, 367386));
+        expected.setUsers(new HashSet<>(Arrays.asList(46481, 181495, 212086, 215268, 367386)));
 
         GroupsGetMembers actual = GroupsGetMembers.fromVkJson(testJson);
 
