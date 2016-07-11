@@ -5,26 +5,27 @@ import com.google.appengine.repackaged.com.google.gson.Gson;
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.google.appengine.repackaged.com.google.gson.JsonParser;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Zigzag on 09.07.2016.
  */
-public class GroupsGetMembersResponse {
+public class GroupsGetMembers {
 
+    private String id;
     private int count;
-    private List<Integer> users;
+    private Set<Integer> users;
 
-    public GroupsGetMembersResponse() {
+    public GroupsGetMembers() {
     }
 
-    public static GroupsGetMembersResponse fromJson(String json) {
+    public static GroupsGetMembers fromJson(String json) {
         Gson g = new Gson();
-        GroupsGetMembersResponse result = g.fromJson(json, GroupsGetMembersResponse.class);
+        GroupsGetMembers result = g.fromJson(json, GroupsGetMembers.class);
         return result;
     }
 
-    public static GroupsGetMembersResponse fromVkJson(String json) {
+    public static GroupsGetMembers fromVkJson(String json) {
         JsonParser parser = new JsonParser();
         JsonObject obj = parser.parse(json).getAsJsonObject();
         String response = obj.get("response").toString();
@@ -35,9 +36,9 @@ public class GroupsGetMembersResponse {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GroupsGetMembersResponse)) return false;
+        if (!(o instanceof GroupsGetMembers)) return false;
 
-        GroupsGetMembersResponse that = (GroupsGetMembersResponse) o;
+        GroupsGetMembers that = (GroupsGetMembers) o;
 
         if (count != that.count) return false;
         return users != null ? users.equals(that.users) : that.users == null;
@@ -50,6 +51,14 @@ public class GroupsGetMembersResponse {
         return result;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public int getCount() {
         return count;
     }
@@ -58,11 +67,11 @@ public class GroupsGetMembersResponse {
         this.count = count;
     }
 
-    public List<Integer> getUsers() {
+    public Set<Integer> getUsers() {
         return users;
     }
 
-    public void setUsers(List<Integer> users) {
+    public void setUsers(Set<Integer> users) {
         this.users = users;
     }
 }
