@@ -1,3 +1,5 @@
+package src.test;
+
 import com.google.appengine.repackaged.com.google.common.base.StringUtil;
 import junit.framework.TestCase;
 

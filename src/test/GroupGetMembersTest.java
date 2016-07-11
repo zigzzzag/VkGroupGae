@@ -1,3 +1,5 @@
+package src.test;
+
 import junit.framework.TestCase;
 import org.zigzzzag.group.model.GroupsGetMembersResponse;
 import org.zigzzzag.group.util.GroupsGetMembers;
