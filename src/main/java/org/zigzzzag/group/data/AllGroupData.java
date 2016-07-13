@@ -20,6 +20,18 @@ public class AllGroupData {
     private AllGroupData() {
     }
 
+    /**
+     * Удаляет группы созданные более 7 дней назад
+     */
+    public void clearOldData() {
+        LocalDate minDate = new LocalDate().minusDays(7);
+        for (GroupData gd : GROUP_DATA_SET) {
+            if (gd.getDate().compareTo(minDate) < 0) {
+                GROUP_DATA_SET.remove(gd);
+            }
+        }
+    }
+
     public GroupData getGroupDataByDate(LocalDate date) {
         for (GroupData gd : GROUP_DATA_SET) {
             if (date.equals(gd.getDate())) {
