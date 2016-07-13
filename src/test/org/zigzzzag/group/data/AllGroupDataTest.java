@@ -4,9 +4,7 @@ import com.google.appengine.repackaged.org.joda.time.LocalDate;
 import junit.framework.TestCase;
 import org.zigzzzag.group.data.AllGroupData;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,12 +14,12 @@ public class AllGroupDataTest extends TestCase {
 
     public void testClearOld() {
         Set<AllGroupData.GroupData> groupDatas = AllGroupData.INSTANCE.GROUP_DATA_SET;
-        groupDatas.add(new AllGroupData.GroupData(new LocalDate(2014, 1, 1)));
-        groupDatas.add(new AllGroupData.GroupData(new LocalDate(1970, 1, 1)));
-        groupDatas.add(new AllGroupData.GroupData(new LocalDate(2018, 1, 1)));
-        groupDatas.add(new AllGroupData.GroupData(new LocalDate()));
-        groupDatas.add(new AllGroupData.GroupData(new LocalDate().minusDays(7)));
-        groupDatas.add(new AllGroupData.GroupData(new LocalDate(1969, 1, 1)));
+        groupDatas.add(new AllGroupData.GroupData(new LocalDate(2014, 1, 1), null));
+        groupDatas.add(new AllGroupData.GroupData(new LocalDate(1970, 1, 1), null));
+        groupDatas.add(new AllGroupData.GroupData(new LocalDate(2018, 1, 1), null));
+        groupDatas.add(new AllGroupData.GroupData(new LocalDate(), null));
+        groupDatas.add(new AllGroupData.GroupData(new LocalDate().minusDays(7), null));
+        groupDatas.add(new AllGroupData.GroupData(new LocalDate(1969, 1, 1), null));
 
         AllGroupData.INSTANCE.clearOldData();
 

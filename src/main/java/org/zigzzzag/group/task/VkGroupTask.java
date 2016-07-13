@@ -24,8 +24,8 @@ public class VkGroupTask implements Runnable {
 
                     storeGroupDataByDate(groupId, response);
 
-                    AllGroupData.GroupData groupData = AllGroupData.INSTANCE.getGroupDataByDate(new LocalDate());
-                    GroupsGetMembers storedMembers = groupData.getGroupGetMembers(groupId);
+                    AllGroupData.GroupData groupData = AllGroupData.INSTANCE.getGroupData(new LocalDate(), groupId);
+                    GroupsGetMembers storedMembers = groupData.getGroup();
 
                     Set<Integer> added = getAddedUserIds(storedMembers, response);
                     groupData.getAddedGroupIds().addAll(added);
@@ -65,14 +65,9 @@ public class VkGroupTask implements Runnable {
     }
 
     private void storeGroupDataByDate(String groupId, GroupsGetMembers response) {
-        AllGroupData.GroupData groupData = AllGroupData.INSTANCE.getGroupDataByDate(new LocalDate());
-        if (groupData != null) {
-            if (groupData.getGroupGetMembers(groupId) == null) {
-                groupData.getGroups().add(response);
-            }
-        } else {
-            AllGroupData.GroupData newGroupData = new AllGroupData.GroupData(new LocalDate());
-            newGroupData.getGroups().add(response);
+        AllGroupData.GroupData groupData = AllGroupData.INSTANCE.getGroupData(new LocalDate(), groupId);
+        if (groupData == null) {
+            AllGroupData.GroupData newGroupData = new AllGroupData.GroupData(new LocalDate(), response);
             AllGroupData.INSTANCE.GROUP_DATA_SET.add(newGroupData);
         }
     }

@@ -3,9 +3,7 @@ package org.zigzzzag.group.data;
 import com.google.appengine.repackaged.org.joda.time.LocalDate;
 import org.zigzzzag.group.model.GroupsGetMembers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -32,9 +30,9 @@ public class AllGroupData {
         }
     }
 
-    public GroupData getGroupDataByDate(LocalDate date) {
+    public GroupData getGroupData(LocalDate date, String groupId) {
         for (GroupData gd : GROUP_DATA_SET) {
-            if (date.equals(gd.getDate())) {
+            if (date.equals(gd.getDate()) && gd.getGroup().getId().equals(groupId)) {
                 return gd;
             }
         }
@@ -45,21 +43,13 @@ public class AllGroupData {
 
     public static class GroupData {
         private final LocalDate date;
-        private List<GroupsGetMembers> groups = new ArrayList<>();
+        private final GroupsGetMembers group;
         private Set<Integer> addedGroupIds = new HashSet<>();
         private Set<Integer> deletedGroupIds = new HashSet<>();
 
-        public GroupData(LocalDate date) {
+        public GroupData(LocalDate date, GroupsGetMembers group) {
             this.date = date;
-        }
-
-        public GroupsGetMembers getGroupGetMembers(String id) {
-            for (GroupsGetMembers ggm : groups) {
-                if (id.equals(ggm.getId())) {
-                    return ggm;
-                }
-            }
-            return null;
+            this.group = group;
         }
 
         @Override
@@ -69,17 +59,20 @@ public class AllGroupData {
 
             GroupData groupData = (GroupData) o;
 
-            return date.equals(groupData.date);
+            if (!date.equals(groupData.date)) return false;
+            return group != null ? group.equals(groupData.group) : groupData.group == null;
 
         }
 
         @Override
         public int hashCode() {
-            return date.hashCode();
+            int result = date.hashCode();
+            result = 31 * result + (group != null ? group.hashCode() : 0);
+            return result;
         }
 
-        public List<GroupsGetMembers> getGroups() {
-            return groups;
+        public GroupsGetMembers getGroup() {
+            return group;
         }
 
         public Set<Integer> getAddedGroupIds() {
