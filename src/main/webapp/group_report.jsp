@@ -1,3 +1,4 @@
+<%@ page import="java.util.Set" %>
 <%--
   Created by IntelliJ IDEA.
   User: Zigzag
@@ -15,7 +16,16 @@
 
 <form action="/groupReport" method="get">
     Дата: <INPUT type="date" name="date"/>
-    Группа: <select name="groupId"><option>1</option><option>2</option> </select>
+    Группа: <select name="groupId">
+            <%
+                Set<String> groupIds = (Set<String>) request.getAttribute("groupIds");
+                for (String groupId : groupIds) {
+            %>
+                <option><%=groupId%></option>
+            <%
+                }
+            %>
+            </select>
     <INPUT type="submit" name="getReport" value="GO"/>
 </form>
 
