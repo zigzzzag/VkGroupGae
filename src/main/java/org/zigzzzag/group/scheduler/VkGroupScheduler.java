@@ -1,5 +1,6 @@
 package org.zigzzzag.group.scheduler;
 
+import org.zigzzzag.group.data.AllGroupData;
 import org.zigzzzag.group.task.VkGroupTask;
 
 import javax.servlet.ServletContextEvent;
@@ -21,6 +22,12 @@ public class VkGroupScheduler implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(new VkGroupTask(), 0, 1, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                AllGroupData.INSTANCE.clearOldData();
+            }
+        }, 0, 1, TimeUnit.DAYS);
     }
 
     @Override
