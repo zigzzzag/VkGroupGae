@@ -28,6 +28,10 @@ public class GroupsGetMembers {
     public static GroupsGetMembers fromVkJson(String json) {
         JsonParser parser = new JsonParser();
         JsonObject obj = parser.parse(json).getAsJsonObject();
+
+        //TODO handle
+        if (obj.get("response") == null) return null;
+
         String response = obj.get("response").toString();
 
         return fromJson(response);

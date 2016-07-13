@@ -10,13 +10,22 @@
 <h1><a href="/">ГРУПС ФОР ДОДО</a></h1>
 <p>Сервис запускает сканирование составов указанных групп раз в 10 минут</p>
 
+
+<form action="/unloadGroupData" method="get">
+    Group Id: <INPUT type="text" name="groupId"/>
+    <INPUT type="submit" name="addGroup" value="Получить всех кентов"/>
+</form>
+
+<br><br>
+
 <form action="/groupMembers" method="get">
     Group Id: <INPUT type="text" name="groupId"/>
     <INPUT type="submit" name="addGroup" value="Добавить в список"/>
     <INPUT type="submit" name="deleteGroup" value="Удалить группу"/>
 </form>
 
-Список групп(GroupId):<br>
+
+Список групп(GroupId), по которым идет ежедневная проверка на пришедших/вышедших:<br>
 <c:forEach items="${vkGroups}" var="item">
     ${item}<br>
 </c:forEach>

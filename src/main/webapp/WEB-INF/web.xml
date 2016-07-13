@@ -32,4 +32,14 @@
         <servlet-name>groupReport</servlet-name>
         <url-pattern>/groupReport</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>unloadGroupData</servlet-name>
+        <servlet-class>org.zigzzzag.group.servlet.UnloadGroupData</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>unloadGroupData</servlet-name>
+        <url-pattern>/unloadGroupData</url-pattern>
+    </servlet-mapping>
 </web-app>

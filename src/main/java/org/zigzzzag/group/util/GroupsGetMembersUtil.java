@@ -4,6 +4,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.zigzzzag.group.model.GroupsGetMembers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,29 +25,29 @@ public class GroupsGetMembersUtil {
         return String.format(GROUPS_GET_MEMBERS, groupId, offset);
     }
 
-    public static org.zigzzzag.group.model.GroupsGetMembers getAllMembers(String groupId) throws IOException {
-        org.zigzzzag.group.model.GroupsGetMembers firstResp = getAllMembers(groupId, 0);
+    public static GroupsGetMembers getAllMembers(String groupId) throws IOException {
+        GroupsGetMembers firstResp = getAllMembers(groupId, 0);
 
         //TODO remake on exception
-        if (firstResp.getCount() > 30_000) {
+        if (firstResp == null || firstResp.getCount() > 30_000) {
             return null;
         }
 
-        Set<org.zigzzzag.group.model.GroupsGetMembers> otherResp = new HashSet<>();
+        Set<GroupsGetMembers> otherResp = new HashSet<>();
         for (int i = MAX_MEMBERS_COUNT_RESPONSE; i < firstResp.getCount(); i += MAX_MEMBERS_COUNT_RESPONSE) {
             otherResp.add(getAllMembers(groupId, i));
         }
 
-        org.zigzzzag.group.model.GroupsGetMembers result = firstResp;
-        for (org.zigzzzag.group.model.GroupsGetMembers resp : otherResp) {
+        GroupsGetMembers result = firstResp;
+        for (GroupsGetMembers resp : otherResp) {
             result.getUsers().addAll(resp.getUsers());
         }
 
         return result;
     }
 
-    private static org.zigzzzag.group.model.GroupsGetMembers getAllMembers(String groupId, int offset) throws IOException {
-        org.zigzzzag.group.model.GroupsGetMembers result;
+    private static GroupsGetMembers getAllMembers(String groupId, int offset) throws IOException {
+        GroupsGetMembers result;
 
         String url = getQuery(groupId, offset);
         HttpGet request = new HttpGet(url);
@@ -61,7 +62,11 @@ public class GroupsGetMembersUtil {
                 resultStrBuf.append(line);
             }
 
-            result = org.zigzzzag.group.model.GroupsGetMembers.fromVkJson(resultStrBuf.toString());
+            result = GroupsGetMembers.fromVkJson(resultStrBuf.toString());
+
+            //TODO handle
+            if(result == null) return null;
+
             result.setId(groupId);
         }
 
@@ -71,7 +76,7 @@ public class GroupsGetMembersUtil {
     public static void main(String[] args) {
         try {
             long start = System.currentTimeMillis();
-            org.zigzzzag.group.model.GroupsGetMembers allMembers = getAllMembers("xpywa");
+            GroupsGetMembers allMembers = getAllMembers("xpywa");
             System.out.println("alltime: " + (System.currentTimeMillis() - start));
             System.out.println(allMembers.getCount());
         } catch (IOException e) {

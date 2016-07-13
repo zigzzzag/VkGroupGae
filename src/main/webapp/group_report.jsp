@@ -55,7 +55,9 @@
     if (deletedIds != null && !deletedIds.isEmpty()) {
         for (Integer deletedId : deletedIds) {
 %>
-<%=deletedId%><br>
+<a href="https://new.vk.com/id<%=deletedId%>"><%=deletedId%>
+</a>
+<br>
 <%
         }
     } else {
