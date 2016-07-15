@@ -15,8 +15,24 @@ import java.util.Set;
  */
 public class VkGroupTask implements Runnable {
 
+    private static final long ONE_HOUR = 60 * 60 * 1000;
+    private boolean work = true;
+
     @Override
     public void run() {
+        while (work) {
+            try {
+                task();
+                //todo remove
+                Thread.sleep(10 * 1000);
+//                Thread.sleep(ONE_HOUR);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void task() {
         if (!GroupManager.VK_GROUPS_ID.isEmpty()) {
             for (String groupId : GroupManager.VK_GROUPS_ID) {
                 try {
@@ -70,5 +86,13 @@ public class VkGroupTask implements Runnable {
             AllGroupData.GroupData newGroupData = new AllGroupData.GroupData(new LocalDate(), response);
             AllGroupData.INSTANCE.GROUP_DATA_SET.add(newGroupData);
         }
+    }
+
+    public boolean isWork() {
+        return work;
+    }
+
+    public void setWork(boolean work) {
+        this.work = work;
     }
 }
