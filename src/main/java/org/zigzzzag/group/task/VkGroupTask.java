@@ -13,26 +13,11 @@ import java.util.Set;
 /**
  * Created by Zigzag on 09.07.2016.
  */
-public class VkGroupTask implements Runnable {
+public class VkGroupTask  {
 
-    private static final long ONE_HOUR = 60 * 60 * 1000;
-    private boolean work = true;
+    public static final VkGroupTask INSTANCE = new VkGroupTask();
 
-    @Override
-    public void run() {
-        while (work) {
-            try {
-                task();
-                //todo remove
-                Thread.sleep(10 * 1000);
-//                Thread.sleep(ONE_HOUR);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void task() {
+    public void execute() {
         if (!GroupManager.VK_GROUPS_ID.isEmpty()) {
             for (String groupId : GroupManager.VK_GROUPS_ID) {
                 try {
@@ -86,13 +71,5 @@ public class VkGroupTask implements Runnable {
             AllGroupData.GroupData newGroupData = new AllGroupData.GroupData(new LocalDate(), response);
             AllGroupData.INSTANCE.GROUP_DATA_SET.add(newGroupData);
         }
-    }
-
-    public boolean isWork() {
-        return work;
-    }
-
-    public void setWork(boolean work) {
-        this.work = work;
     }
 }

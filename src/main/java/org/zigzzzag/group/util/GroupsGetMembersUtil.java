@@ -29,7 +29,7 @@ public class GroupsGetMembersUtil {
         GroupsGetMembers firstResp = getAllMembers(groupId, 0);
 
         //TODO remake on exception
-        if (firstResp == null || firstResp.getCount() > 30_000) {
+        if (firstResp == null || firstResp.getCount() > 10_000_000) {
             return null;
         }
 

@@ -3,6 +3,7 @@ package org.zigzzzag.group.data;
 import com.google.appengine.repackaged.org.joda.time.LocalDate;
 import org.zigzzzag.group.model.GroupsGetMembers;
 
+import java.security.acl.Group;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -16,6 +17,22 @@ public class AllGroupData {
     public final Set<GroupData> GROUP_DATA_SET = new CopyOnWriteArraySet<>();
 
     private AllGroupData() {
+    }
+
+    public LocalDate getActualDate() {
+        if (GROUP_DATA_SET.isEmpty()) return null;
+
+        LocalDate maxDate = null;
+        for (GroupData gd : GROUP_DATA_SET) {
+            if (maxDate == null) {
+                maxDate = gd.getDate();
+                continue;
+            }
+            if (maxDate.isBefore(gd.getDate())) {
+                maxDate = gd.getDate();
+            }
+        }
+        return maxDate;
     }
 
     /**

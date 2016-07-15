@@ -7,6 +7,12 @@
 <body>
 <h1><a href="/">ГРУПС ФОР ДОДО</a></h1>
 
+<form action="/refreshData">
+    <button type="submit">Обновить состояние</button>
+    Состояние актуально
+    на: <%=request.getAttribute("actualDate") == null ? "Вообще не актуально" : request.getAttribute("actualDate")%>
+</form>
+
 <a href="/groupMembers">Управление группами</a>
 <br>
 <a href="/groupReport">Отчет по группам</a>

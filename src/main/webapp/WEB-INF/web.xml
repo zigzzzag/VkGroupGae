@@ -5,13 +5,25 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <welcome-file-list>
-        <welcome-file>main.jsp</welcome-file>
-    </welcome-file-list>
+    <servlet>
+        <servlet-name>main</servlet-name>
+        <servlet-class>org.zigzzzag.group.servlet.Main</servlet-class>
+    </servlet>
 
-    <listener>
-        <listener-class>org.zigzzzag.group.scheduler.VkGroupScheduler</listener-class>
-    </listener>
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>refreshData</servlet-name>
+        <servlet-class>org.zigzzzag.group.servlet.RefreshData</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>refreshData</servlet-name>
+        <url-pattern>/refreshData</url-pattern>
+    </servlet-mapping>
 
    <servlet>
         <servlet-name>groupManager</servlet-name>
